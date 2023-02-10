@@ -2,11 +2,11 @@ from cell import Cell
 
 
 class Spreadsheet:
-    def __init__(self, row: int, column: int):
+    def __init__(self, row: int, column: int) -> None:
         self.__cells = []
         self.__make_sheet(row, column)
 
-    def get_cells(self):
+    def get_cells(self) -> list:
         return self.__cells
 
     def __make_sheet(self, row: int, column: int) -> None:
@@ -27,7 +27,7 @@ class Spreadsheet:
 
     def add_column(self, index_col: int) -> None:
         for row in self.__cells:
-            row.insert(index_col, [""])
+            row.insert(index_col, "")
 
     def remove_column(self, index_col: int) -> None:
         for row in self.__cells:
@@ -38,6 +38,6 @@ class Spreadsheet:
             self.__cells[second_row-1], self.__cells[first_row-1]
 
     def swap_columns(self, first_col: int, second_col: int) -> None:
-        for row in self.__cells:
+        for row in range(len(self.__cells)):
             self.__cells[row][first_col-1], self.__cells[row][second_col-1] = \
                 self.__cells[row][second_col-1], self.__cells[row][first_col-1]
