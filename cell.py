@@ -1,5 +1,5 @@
+import datetime
 from config import *
-from datetime import date
 
 
 class Cell:
@@ -11,10 +11,10 @@ class Cell:
         self.__value = str(value)
 
     def set_color(self, color):
-        if color in colors:
-            self.__color = colors[color]
-        else:
-            return "Color not found "
+        if color not in colors:
+            raise ValueError(f'There is no such a color: {color}.')
+
+        self.__color = colors[color]
 
     def get_value(self):
         return self.__value
@@ -29,10 +29,7 @@ class Cell:
         return float(self.__value)
 
     def to_date(self):
-        try:
-            date(int(self.__value[:4]), int(self.__value[5:7], int(self.__value[8:])))
-        except:
-            "cannot be converted to date"
+        return datetime.datetime.strptime(self.__value, "%Y-%m-%d")
 
     def reset(self):
         self.__value = ''
